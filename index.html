@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>document</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <style>
+        .section { display: none; }
+        .active { display: block; }
+        .house-container { display: block; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <nav>
+            <img src="dtt.png" class="dtt">
+            <ul class="bars">
+                <li><a href="#" onclick="showSection('houses')">Huizen</a></li>
+                <li><a href="#" onclick="showSection('about')">Over ons</a></li>
+                <li><a href="#" onclick="showSection('create')">Uploaden</a></li>
+
+            </ul>
+        </nav>
+        <div class="containerr">
+            <input type="text" id="searchInput" class="search-bar" placeholder="Zoek straatnaam...">
+            <button onclick="zoekStraat()">Zoeken</button>
+            <div id="result" class="result"></div>
+            
+        </div>
+      
+    </div>
+</div>
+
+   
+    <div id="houses" class="section active">
+        <div class="house-container" data-straat="amsterdam">
+            <div class="example">
+                <img src="huis1.png">
+                <h1>Slotendijk 21 1424 AE Amsterdam, $710.000, 161m² 372m²</h1>
+            </div>
+        </div>
+        <div class="house-container" data-straat="lelystad">
+            <div class="example">
+                <img src="huis2(1).png">
+                <h1>Nieuwegijnweg 23 1723 DJ Lelystad, $1,000,000, 170m² 390m²</h1>
+            </div>
+            <div class="house-container" data-straat="lelystad"></div>
+            <div class="example">
+                <img src="h3..png">
+                <h1>Slotermeerweg 4 1845 DJ Lelystad, $1,000,000, 100m² 190m²</h1>
+            </div>
+        </div>
+        <div class="house-container" data-straat="rotterdam">
+            <div class="example">
+                <img src="h4.png">
+                <h1>Hoogezandstraat 34 2055 AJ Rotterdam, $1,500,000, 240m² 210m²</h1>
+            </div>
+        </div>
+        <div class="house-container" data-straat="almere">
+            <div class="example">
+                <img src="h5.png">
+                <h1>Zadkinestraat 22 1321 DT Almere, $950,000, 230m² 200m²</h1>
+            </div>
+            
+        </div>
+        </div>
+    </div>
+
+    <div id="about" class="section">
+        <div class="about-content">
+            <h1>About us</h1>
+            <div class="about-text">
+                <p>Welkom bij onze Huizenwebsite. Ontdek de perfecte woning met onze uitgebreide lijst van beschikbare woningen. Van charmante huizen, elk huis biedt gedetailleerde informatie over adres, prijs en grootte.</p>
+                <p>Verkoop ook uw huis. Bied uw woning gemakkelijk aan met alle benodigde informatie. Bereik potentiële kopers snel.</p>
+                <p>Mis uw kans niet! Verken ons aanbod van prachtige woningen vandaag nog. Voor je het weet zijn ze verkocht!</p>
+                <p>Voor meer ontdekkingen over verschillende apps over zorg, lifestyle etc. neem gerust een kijkje op <a href="https://www.d-tt.nl/apps">https://www.d-tt.nl/apps</a>.</p>
+            </div>
+        </div>
+    </div>
+            <div id="create" class="section">
+                <div class="form-container">
+                    <h1>stuur ons uw huis door</h1>
+                    <form id="houseForm">
+                        <label for="address">Adres:</label>
+                        <input type="text" id="address" name="address" required>
+        
+                        <label for="price">Prijs:</label>
+                        <input type="text" id="price" name="price" required>
+        
+                        <label for="size">Afmetingen (m²):</label>
+                        <input type="text" id="size" name="size" required>
+
+                        <label for="description">Beschrijving:</label>
+                        <input type="text" id="description" name="Description" required>
+
+                        <label for="images">Afbeeldingen:</label>
+                        <input type="file" id="images" name="images" accept="image/*" multiple required>
+                       
+        
+                        <button type="submit">Versturen</button>  
+            </div>
+        </div>
+    </div>  
+
+
+    <script>
+        function showSection(sectionId) {
+           
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.remove('active'));
+
+          
+            const activeSection = document.getElementById(sectionId);
+            activeSection.classList.add('active');
+        }
+
+        const straatnamen = ["amsterdam", "lelystad","rotterdam", "almere"];
+
+        function zoekStraat() {
+        const input = document.getElementById('searchInput').value.toLowerCase();
+        const resultDiv = document.getElementById('result');
+        const gevonden = straatnamen.includes(input);
+
+        function toonAlleHuiscontainers(visible) {
+        document.querySelectorAll('.house-container').forEach(container => {
+            container.style.display = visible ? 'block' : 'none';
+        });
+    }
+
+    if (gevonden) {
+        resultDiv.textContent = `Straatnaam gevonden: ${input}`;
+        toonAlleHuiscontainers(false);
+        document.querySelectorAll(`.house-container[data-straat="${input}"]`).forEach(container => {
+            container.style.display = 'block';
+        });
+    } else {
+        resultDiv.textContent = 'Match niet gevonden';
+        toonAlleHuiscontainers(true);
+    }
+}
+
+
+    
+</script>
+
+
+    
+</body>
+</html>
+
+
